@@ -12,6 +12,7 @@ public class ButtonMasher : MonoBehaviour {
 
     private int score = 0; //the numerical data value of our score
     private float timeRemaining = 0; //Numerical time remaining for completion of the game
+    private bool gameRunning = true;//Game time playing or not
 
 	// Use this for initialization
 	void Start () {
@@ -30,17 +31,34 @@ public class ButtonMasher : MonoBehaviour {
 
         //update the visual time remaining
         timerText.text = (Mathf.CeilToInt(timeRemaining)).ToString();
+
+        //Check if we run out of time
+        if(timeRemaining <= 0)
+        {
+            //Stop running the game
+            gameRunning = false;
+
+            //Stop our time from going to negative
+            timeRemaining = 0;
+        }//End of if(timeRemaining <= 0)
+
     }//End of Update ()
 
     void OnMouseDown()
     {
         Debug.Log("OnMouseDown method called");
-        //Trigger our clicking sound to play
-        clickSound.Play();
-        // increase the score by 1
-        score = score + 1;
-        //update visual score
-        scoreText.text = score.ToString();
+
+        //check if the game is still running...
+        if(gameRunning == true)
+        {
+            //Trigger our clicking sound to play
+            clickSound.Play();
+            // increase the score by 1
+            score = score + 1;
+            //update visual score
+            scoreText.text = score.ToString();
+        }//End of if(gameRunning == true)
+
     }// End of OnMouseDown()
 
 
