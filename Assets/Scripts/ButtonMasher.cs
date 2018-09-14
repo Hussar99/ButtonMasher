@@ -29,7 +29,7 @@ public class ButtonMasher : MonoBehaviour {
         timeRemaining = timeRemaining - Time.deltaTime;
 
         //update the visual time remaining
-        timerText.text = timeRemaining.ToString();
+        timerText.text = (Mathf.CeilToInt(timeRemaining)).ToString();
     }//End of Update ()
 
     void OnMouseDown()
